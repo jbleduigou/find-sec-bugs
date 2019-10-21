@@ -1,13 +1,17 @@
 language: java
 
 jdk:
-  - oraclejdk8
-  - oraclejdk9
-  - oraclejdk10
+  - openjdk8
+  - openjdk9
+  - openjdk10
+  - openjdk11
+# It is unlikely that OpenJDK Early Access (openjdk-ea) it will work in the near future, the ASM library supports only bytecode from official release version.
+#  - openjdk-ea
 
-matrix:
-  allow_failures:
-    - jdk: oraclejdk10
+
+#matrix:
+#  allow_failures:
+#    - jdk: openjdk-ea
 
 # Activate container based infra https://docs.travis-ci.com/user/workers/container-based-infrastructure/
 sudo: false
@@ -18,4 +22,4 @@ script: mvn verify -B -V -Ptravisci
 after_success:
 # Coveralls
 # Report available here : https://coveralls.io/github/find-sec-bugs/find-sec-bugs
-  - mvn clean cobertura:cobertura coveralls:report
+  - mvn clean test -Pjacoco && bash <(curl -s https://codecov.io/bash)

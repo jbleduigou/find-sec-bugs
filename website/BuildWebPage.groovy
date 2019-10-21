@@ -1,79 +1,35 @@
 import groovy.text.SimpleTemplateEngine
-import groovy.io.FileType
+
+import static MetadataFileUtil.*;
 
 System.setProperty("file.encoding", "UTF-8")
 
-String metaDataDir = "../plugin/src/main/resources/metadata"
-
-//Contains the bug descriptions
-InputStream messagesStreamEn = new FileInputStream(new File(metaDataDir,"messages.xml"))
-InputStream messagesStreamJa = new FileInputStream(new File(metaDataDir,"messages_ja.xml"))
-
 //Html Template of the documentation page
 def getTemplateReader(String path) {
-     return new InputStreamReader(
-            new FileInputStream(new File("templates",path)), "UTF-8");
+    return new InputStreamReader(
+            new FileInputStream(new File("templates", path)), "UTF-8");
 }
 
 //Generated page will be place there
 outDir = "out_web/"
 
-def buildMapping(InputStream xmlStream) {
-    rootXml = new XmlParser().parse(new InputStreamReader(xmlStream,"UTF-8"))
-    println "Mapping the descriptions to the templates"
-    def bugsBinding = [:]
-    bugsBinding['bugPatterns'] = []
-
-    bugsBinding['nbPatterns'] = 0
-    bugsBinding['nbDetectors'] = 0
-
-    rootXml.BugPattern.each { pattern ->
-        bugsBinding['bugPatterns'].add(
-                ['title': pattern.ShortDescription.text().replaceAll(" in \\{1\\}",""),
-                 'description': pattern.Details.text(),
-                 'type':pattern.attribute("type")])
-        //println pattern.ShortDescription.text()
-        bugsBinding['nbPatterns']++
-    }
-
-    rootXml.Detector.each { detector ->
-        bugsBinding['nbDetectors']++
-    }
-    return bugsBinding
-}
-
-int countSignature(String folder) {
-    def dir = new File(folder)
-
-    int count = 0
-    dir.eachFileRecurse (FileType.FILES) { file ->
-        //println file.getName()
-        file.eachLine { line ->
-            String lineTrim = line.trim()
-            if(lineTrim == "" || lineTrim.startsWith("-")) return
-            count++
-        }
-    }
-    return count
-}
-
 //Loading detectors
 println "Importing message from messages.xml"
-bugsBindingEn = buildMapping(messagesStreamEn)
+def bugsBindingEn = buildMapping(messagesStreamEn)
 bugsBindingEn['lang'] = 'en'
-bugsBindingJa = buildMapping(messagesStreamJa)
+def bugsBindingJa = buildMapping(messagesStreamJa)
 bugsBindingJa['lang'] = 'ja'
 
-nbSignatures = countSignature("../plugin/src/main/resources/injection-sinks/") + countSignature("../plugin/src/main/resources/password-methods/")
+nbSignatures = countSignature("../findsecbugs-plugin/src/main/resources/injection-sinks/") + countSignature("../findsecbugs-plugin/src/main/resources/password-methods/")
 
 //Version and download links
 
 
-latestVersion = "1.8.0"
+latestVersion = "1.9.0"
 downloadUrl = "https://search.maven.org/remotecontent?filepath=com/h3xstream/findsecbugs/findsecbugs-plugin/${latestVersion}/findsecbugs-plugin-${latestVersion}.jar"
 mavenCentralSearch = "https://search.maven.org/#search|gav|1|g:%22com.h3xstream.findsecbugs%22 AND a:%22findsecbugs-plugin%22"
 releaseNotesUrl = "https://github.com/find-sec-bugs/find-sec-bugs/releases/latest" //This link redirect to the latest release
-latestUpdateDate = "June 28th, 2018"
+latestUpdateDate = "March 27th, 2019"
 
 //Screenshots
 
