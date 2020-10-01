@@ -44,7 +44,7 @@
     <Detector class="com.h3xstream.findsecbugs.csrf.SpringCsrfUnrestrictedRequestMappingDetector" reports="SPRING_CSRF_UNRESTRICTED_REQUEST_MAPPING"/>
     <Detector class="com.h3xstream.findsecbugs.injection.custom.CustomInjectionDetector" reports="CUSTOM_INJECTION"/>
     <Detector class="com.h3xstream.findsecbugs.injection.sql.SqlInjectionDetector"
-              reports="SQL_INJECTION,SQL_INJECTION_TURBINE,SQL_INJECTION_HIBERNATE,SQL_INJECTION_JDO,SQL_INJECTION_JPA,SQL_INJECTION_JDBC,SQL_INJECTION_SPRING_JDBC,SCALA_SQL_INJECTION_SLICK,SCALA_SQL_INJECTION_ANORM"/>
+              reports="SQL_INJECTION,SQL_INJECTION_VERTX,SQL_INJECTION_TURBINE,SQL_INJECTION_HIBERNATE,SQL_INJECTION_JDO,SQL_INJECTION_JPA,SQL_INJECTION_JDBC,SQL_INJECTION_SPRING_JDBC,SCALA_SQL_INJECTION_SLICK,SCALA_SQL_INJECTION_ANORM"/>
     <Detector class="com.h3xstream.findsecbugs.injection.sql.AndroidSqlInjectionDetector" reports="SQL_INJECTION_ANDROID"/>
     <Detector class="com.h3xstream.findsecbugs.crypto.BadHexadecimalConversionDetector" reports="BAD_HEXA_CONVERSION"/>
     <Detector class="com.h3xstream.findsecbugs.crypto.HazelcastSymmetricEncryptionDetector"
@@ -83,6 +83,7 @@
     <Detector class="com.h3xstream.findsecbugs.injection.script.OgnlInjectionDetector"
               reports="OGNL_INJECTION"/>
     <Detector class="com.h3xstream.findsecbugs.injection.script.SpelViewDetector" reports="SPEL_INJECTION"/>
+    <Detector class="com.h3xstream.findsecbugs.groovy.GroovyShellDetector" reports="GROOVY_SHELL"/>
     <Detector class="com.h3xstream.findsecbugs.HttpResponseSplittingDetector" reports="HTTP_RESPONSE_SPLITTING"/>
     <Detector class="com.h3xstream.findsecbugs.injection.crlf.CrlfLogInjectionDetector" reports="CRLF_INJECTION_LOGS"/>
     <Detector class="com.h3xstream.findsecbugs.ExternalConfigurationControlDetector" reports="EXTERNAL_CONFIG_CONTROL"/>
@@ -131,6 +132,8 @@
     <Detector class="com.h3xstream.findsecbugs.wicket.WicketXssComponentDetector" reports="WICKET_XSS1"/>
     <Detector class="com.h3xstream.findsecbugs.file.OverlyPermissiveFilePermissionDetector" reports="OVERLY_PERMISSIVE_FILE_PERMISSION"/>
     <Detector class="com.h3xstream.findsecbugs.file.SuspiciousCommandDetector" reports="OVERLY_PERMISSIVE_FILE_PERMISSION"/>
+    <Detector class="com.h3xstream.findsecbugs.password.JschPasswordDetector" reports="HARD_CODE_PASSWORD"/>
+    <Detector class="com.h3xstream.findsecbugs.ImproperHandlingUnicodeDetector" reports="IMPROPER_UNICODE"/>
 
     <BugPattern type="HTTP_PARAMETER_POLLUTION" abbrev="SECHPP" category="SECURITY"/>
     <BugPattern type="SMTP_HEADER_INJECTION" abbrev="SECSMTP" category="SECURITY"/>
@@ -192,6 +195,7 @@
     <BugPattern type="SAML_IGNORE_COMMENTS" abbrev="SECSAMLC" category="SECURITY"/>
     <BugPattern type="CUSTOM_INJECTION" abbrev="SECCUSTOMI" category="SECURITY" cweid="74"/>
     <BugPattern type="SQL_INJECTION" abbrev="SECSQLIHIB" category="SECURITY" cweid="564"/>
+    <BugPattern type="SQL_INJECTION_VERTX" abbrev="SECSQLIVX" category="SECURITY" cweid="564"/>
     <BugPattern type="SQL_INJECTION_TURBINE" abbrev="SECSQLITU" category="SECURITY" cweid="564"/>
     <BugPattern type="SQL_INJECTION_HIBERNATE" abbrev="SECSQLIHIB" category="SECURITY" cweid="564"/>
     <BugPattern type="SQL_INJECTION_JDO" abbrev="SECSQLIJDO" category="SECURITY" cweid="89"/>
@@ -242,6 +246,7 @@
     <BugPattern type="EL_INJECTION" abbrev="SECEL" category="SECURITY" cweid="94"/>
     <BugPattern type="SEAM_LOG_INJECTION" abbrev="SECSEAM" category="SECURITY" cweid="94"/>
     <BugPattern type="OGNL_INJECTION" abbrev="SECOGNL" category="SECURITY" cweid="94"/>
+    <BugPattern type="GROOVY_SHELL" abbrev="SECGROSH" category="SECURITY" cweid="94"/>
     <BugPattern type="HTTP_RESPONSE_SPLITTING" abbrev="SECHRS" category="SECURITY" cweid="113"/>
     <BugPattern type="CRLF_INJECTION_LOGS" abbrev="SECCRLFLOG" category="SECURITY" cweid="117"/>
     <BugPattern type="EXTERNAL_CONFIG_CONTROL" abbrev="SECCONFCTRL" category="SECURITY" cweid="15"/>
@@ -267,5 +272,6 @@
     <BugPattern type="RPC_ENABLED_EXTENSIONS" abbrev="RPCEXT" category="SECURITY"/>
     <BugPattern type="WICKET_XSS1" abbrev="WICXSS1" category="SECURITY"/>
     <BugPattern type="OVERLY_PERMISSIVE_FILE_PERMISSION" abbrev="SECOPFP" category="SECURITY"/>
+    <BugPattern type="IMPROPER_UNICODE" abbrev="SECUNI" category="SECURITY"/>
 
 </FindbugsPlugin>

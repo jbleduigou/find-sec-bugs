@@ -79,8 +79,12 @@
                         <exclude>**/java/com/typesafe/**/**.java</exclude>
                         <exclude>**/java/com/fasterxml/jackson/**/**.java</exclude>
                         <exclude>**/java/ognl/**/**.java</exclude>
+                        <exclude>**/com/sun/**/**.java</exclude>
+                        <exclude>**/sun/security/**/**.java</exclude>
                         <exclude>**/com/opensymphony/**/**.java</exclude>
                         <exclude>**/com/google/**/**.java</exclude>
+                        <exclude>**/com/jcraft/**/**.java</exclude>
+                        <exclude>**/io/vertx/**/**.java</exclude>
                         <exclude>**/java/kotlin/**</exclude>
                         <exclude>**/org/jetbrains/**</exclude>
                     </excludes>
@@ -189,6 +193,17 @@
                                 </goals>
                             </execution>
                         </executions>
+                    </plugin>
+
+                    <!-- SpotBugs for general static code analysis -->
+                    <plugin>
+                        <groupId>com.github.spotbugs</groupId>
+                        <artifactId>spotbugs-maven-plugin</artifactId>
+                        <version>3.1.12</version>
+                        <configuration>
+                            <xmlOutput>true</xmlOutput>
+                            <failOnError>false</failOnError>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
